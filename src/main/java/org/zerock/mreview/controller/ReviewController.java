@@ -12,7 +12,7 @@ import org.zerock.mreview.service.ReviewService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/reviews")
+@RequestMapping("reviews")
 @Log4j2
 @RequiredArgsConstructor
 public class ReviewController {

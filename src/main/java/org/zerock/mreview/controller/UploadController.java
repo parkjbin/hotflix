@@ -35,7 +35,7 @@ public class UploadController {
     
     // ResponseEntity<> : 클라이언트에게 View의 정보가 아닌 HTTP 정보만을 반환해야 할때
     // HTTP 상태 코드 표 : https://developer.mozilla.org/ko/docs/Web/HTTP/Status
-    @PostMapping("/uploadAjax")
+    @PostMapping("uploadAjax")
     public ResponseEntity<List<UploadResultDTO>> uploadFile(MultipartFile[] uploadFiles) { // 파일 업로드
         // UploadResultDTO 클래스 타입의 List 컬렉션 객체 생성
         List<UploadResultDTO> resultDTOList = new ArrayList<>();
@@ -103,7 +103,7 @@ public class UploadController {
         return folderPath;
     }
 
-    @GetMapping("/display")
+    @GetMapping("display")
     public ResponseEntity<byte[]> getFile(String fileName, String size) { // JSON으로 반환된 업로드 이미지 출력하기
 
         ResponseEntity<byte[]> result = null;

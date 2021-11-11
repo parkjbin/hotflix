@@ -16,7 +16,7 @@ import org.zerock.mreview.entity.Movie;
 import org.zerock.mreview.service.MovieService;
 
 @Controller
-@RequestMapping("/movie")
+@RequestMapping("movie")
 @Log4j2
 @RequiredArgsConstructor
 public class MovieController {
@@ -24,13 +24,13 @@ public class MovieController {
     private final MovieService movieService; //final
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/register")
+    @GetMapping("register")
     public void register() {
         log.info("register..........");
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/register")
+    @PostMapping("register")
     public String register(MovieDTO movieDTO, RedirectAttributes redirectAttributes) {
         log.info("movieDTO: " + movieDTO);
         
@@ -47,7 +47,7 @@ public class MovieController {
     }
 
     @PreAuthorize("permitAll()")
-    @GetMapping("/list")
+    @GetMapping("list")
     public void list(PageRequestDTO pageRequestDTO, Model model) {
         log.info("pageRequestDTO: " + pageRequestDTO);
         model.addAttribute("result", movieService.getList(pageRequestDTO));
@@ -58,7 +58,7 @@ public class MovieController {
     // 2) 생성된 오브젝트에(PageRequestDTO) HTTP로 넘어 온 값들을 자동으로 바인딩한다.
     // 3) 마지막으로 @ModelAttribute 어노테이션이 붙은 객체(PageRequestDTO 객체)가 자동으로 Model 객체에 추가되고 뷰단으로 전달된다.
     @PreAuthorize("permitAll()")
-    @GetMapping("/read")
+    @GetMapping("read")
     public void read(long mno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model){
         log.info("mno: " + mno);
         MovieDTO movieDTO = movieService.getMovie(mno);
@@ -66,7 +66,7 @@ public class MovieController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/modify")
+    @GetMapping("modify")
     public void modify(long mno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model){
         log.info("mno: " + mno);
         MovieDTO movieDTO = movieService.getMovie(mno);
@@ -74,7 +74,7 @@ public class MovieController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/remove") // 영화 삭제 기능
+    @PostMapping("remove") // 영화 삭제 기능
     public String remove(long mno, RedirectAttributes redirectAttributes) {
         log.info("mno: " + mno);
         movieService.removeWithReplise(mno);
@@ -83,7 +83,7 @@ public class MovieController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/modify") // 영화 수정 기능
+    @PostMapping("modify") // 영화 수정 기능
     public String modify(MovieDTO dto, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, RedirectAttributes redirectAttributes) {
         log.info("post modify..................");
         log.info("dto: " + dto);
@@ -100,7 +100,7 @@ public class MovieController {
     }
 
     @PreAuthorize("permitAll()")
-    @GetMapping("/signup")
+    @GetMapping("signup")
     public void signup() {
         log.info("signup....");
     }

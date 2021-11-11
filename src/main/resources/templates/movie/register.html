@@ -32,7 +32,7 @@
     </style>
 </head>
 <body>
-    <th:block th:replace="~{/layout/basic :: setContent(~{this :: content})}">
+    <th:block th:replace="~{layout/basic :: setContent(~{this :: content})}">
         <th:block th:fragment="content">
             <h1 class="mt-4">영화 등록</h1><br>
             <form th:action="@{/movie/register}" th:method="post">

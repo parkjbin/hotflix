@@ -17,7 +17,7 @@ import org.zerock.mreview.security.dto.ClubAuthMemberDTO;
 import org.zerock.mreview.service.FreeBoardService;
 
 @Controller
-@RequestMapping("/freeboard")
+@RequestMapping("freeboard")
 @Log4j2
 @RequiredArgsConstructor //자동 주입을 위한 Annotation
 public class FreeBoardController {
@@ -31,7 +31,7 @@ public class FreeBoardController {
 //    }
 
     @PreAuthorize("permitAll()")
-    @GetMapping("/list")
+    @GetMapping("list")
     public void list(PageRequestDTO pageRequestDTO, Model model){
 
         log.info("list............." + pageRequestDTO);
@@ -40,7 +40,7 @@ public class FreeBoardController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @GetMapping("/register")
+    @GetMapping("register")
     public void register(@AuthenticationPrincipal ClubAuthMemberDTO clubAuthMemberDTO){
         log.info("regiser get...");
         log.info("----------------------");
@@ -48,7 +48,7 @@ public class FreeBoardController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @PostMapping("/register")
+    @PostMapping("register")
     public String registerPost(FreeBoardDTO dto, RedirectAttributes redirectAttributes){
 
         log.info("dto..." + dto);
@@ -62,7 +62,7 @@ public class FreeBoardController {
     }
 
     @PreAuthorize("permitAll()")
-    @GetMapping("/read")
+    @GetMapping("read")
     public void read(long gno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model ){
         log.info("gno: " + gno);
         FreeBoardDTO dto = service.read(gno);
@@ -70,7 +70,7 @@ public class FreeBoardController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @GetMapping( "/modify")
+    @GetMapping( "modify")
     public void modify(long gno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model ){
         log.info("gno: " + gno);
         FreeBoardDTO dto = service.read(gno);
@@ -78,7 +78,7 @@ public class FreeBoardController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @PostMapping("/remove")
+    @PostMapping("remove")
     public String remove(long gno, RedirectAttributes redirectAttributes){
 
 
@@ -93,7 +93,7 @@ public class FreeBoardController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @PostMapping("/modify")
+    @PostMapping("modify")
     public String modify(FreeBoardDTO dto,
                          @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
                          RedirectAttributes redirectAttributes){

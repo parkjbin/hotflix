@@ -29,7 +29,7 @@
 </head>
 
 <body>
-    <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+    <th:block th:replace="~{layout/basic :: setContent(~{this::content})}">
         <th:block th:fragment="content">
             <h1 class="mt-4">[[${dto.sponsor}]]에서 상영중인 [[${dto.title}]] 영화 정보</h1>
             <div sec:authorize="isAuthenticated()">
