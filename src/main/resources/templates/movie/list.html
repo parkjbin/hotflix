@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <th:block th:replace="~{/layout/basic :: setContent(~{this :: content})}">
+        <th:block th:fragment="content">
+            <h1 class="mt-4">영화 목록 리스트
+                <span>
+                    <a th:href="@{/movie/register}">
+                        <button type="button" class="btn btn-secondary">영화 등록</button>
+                    </a>
+                </span>
+            </h1>
+
+            <form action="/movie/list" method="get" id="searchForm">
+                <div class="input-group">
+                    <input type="hidden" name="page" value="1">
+                    <div class="input-group-prepend">
+                        <select class="custom-select" name="type">
+                            <option th:selected="${pageRequestDTO.type == null}">------</option>
+                            <option value="t" th:selected="${pageRequestDTO.type == 't'}">제목</option>
+                            <option value="r" th:selected="${pageRequestDTO.type == 'r'}">댓글 내용</option>
+                            <option value="tr" th:selected="${pageRequestDTO.type == 'tr'}">제목 + 댓글 내용</option>
+                        </select>
+                    </div>
+                    <input class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}">
+                    <div class="input-group-append" id="button-addon4">
+                        <button class="btn btn btn-secondary btn-search" type="button"style="margin-right: 4px;">검색</button>
+                        <button class="btn btn btn-secondary btn-clear" type="button">초기화</button>
+                    </div>
+                </div>
+            </form>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">제목 & 사진</th>
+                    <th scope="col">제공 업체</th>
+                    <th scope="col">리뷰 개수</th>
+                    <th scope="col">평점</th>
+                    <th scope="col">등록 시간</th>
+                </tr>
+                </thead>
+                <tbody>
+<!--                <img th:src="@{/images/joker.jpg}" id="backgroundImg"></br>-->
+                <tr th:each="dto : ${result.dtoList}">
+                    <th scope="row">
+                        <a th:href="@{/movie/read(mno=${dto.mno}, page=${result.page})}">[[${dto.mno}]]</a>
+                    </th>
+                    <!-- MovieDTO 안에 있는 imageDTOList의 크기가 0보다 크다면 그리고 경로에 사진이 없지 않다면 -->
+                    <!-- 즉, 사진이 있으며 저장 경로에 사진이 존재하다면 <img> 태그 생성 -->
+                    <td><img th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}"
+                        th:src="|/display?fileName=${dto.imageDTOList[0].getThumbnailURL()}|">[[${dto.title}]]</td>
+                    <td>[[${dto.sponsor}]]</td>
+                    <td><b>[[${dto.reviewCnt}]]</b></td>
+                    <td><b>[[${dto.avg}]]</b></td>
+                    <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+                </tr>
+                </tbody>
+            </table>
+            <ul class="pagination h-100 justify-content-center align-items-center">
+                <li class="page-item" th:if="${result.prev}">
+                    <a class="page-link" th:href="@{/movie/list(page=${result.start - 1})}" tabindex="-1">이전</a>
+                </li>
+                <li th:class=" 'page-item ' + ${result.page == page?'active':''}" th:each="page:${result.pageList}">
+                    <a class="page-link" th:href="@{/movie/list(page=${page})}">[[${page}]]</a>
+                </li>
+                <li class="page-item" th:if="${result.next}">
+                    <a class="page-link" th:href="@{/movie/list(page=${result.end + 1})}">다음</a>
+                </li>
+            </ul>
+            <script th:inline="javascript">
+                var msg = [[${msg}]];
+                console.log(msg);
+
+                if (msg) {
+                    $(".modal").modal();
+                }
+
+                var searchForm = $("#searchForm");
+                $('.btn-search').click(function(e){
+                    searchForm.submit();
+                });
+
+                $('.btn-clear').click(function(e) {
+                    searchForm.empty().submit();
+                });
+            </script>
+        </th:block>
+    </th:block>
+</body>
+</html>

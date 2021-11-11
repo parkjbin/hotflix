@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+    <th:block th:fragment="content">
+        <h1 class="mt-4">자유게시판 글쓰기</h1><br>
+
+<!--        <div sec:authorize="hasRole('USER')">Has USER ROLE</div>-->
+<!--        <div sec:authorize="hasRole('MANAGER')">Has MANAGER ROLE</div>-->
+<!--        <div sec:authorize="hasRole('ADMIN')">Has ADMIN ROLE</div>-->
+
+<!--         isAuthenticated(): 인증된 사용자만 볼 수 있는 영역-->
+<!--        <div sec:authorize="isAuthenticated()">-->
+<!--            인증된 사용자만 이 텍스트를 볼 수 있습니다.-->
+<!--        </div>-->
+
+<!--        Authenticated username:-->
+<!--        <b><div sec:authentication="name"></div></b>-->
+<!--        Authenticated user roles:-->
+<!--        <div sec:authentication="principal.authorities"></div>-->
+
+        <form th:action="@{/freeboard/register}" th:method="post">
+            <div class="form-group">
+                <label>제목</label>
+                <input type="text" class="form-control" name="title" placeholder="제목을 입력하시오.">
+            </div>
+            <div class="form-group">
+                <label>내용</label>
+                <textarea class="form-control" rows="5" name="content" placeholder="내용을 입력하시오."></textarea>
+            </div>
+            <div class="form-group">
+                <label>작성자</label>
+                <input type="text" class="form-control" name="writer" placeholder="작성자를 입력하시오.">
+            </div>
+            <button type="submit" class="btn btn-primary">작성</button>
+            <a th:href="@{/freeboard/list}"><button type="button" class="btn btn-info">취소</button></a>
+        </form>
+    </th:block>
+</th:block>

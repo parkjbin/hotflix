@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:fragment="setContent(content)">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Simple Sidebar - Start Bootstrap Template</title>
+
+        <link rel="stylesheet" href="/assets/css/main.css">
+
+        <!-- Bootstrap core CSS -->
+        <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link th:href="@{/css/simple-sidebar.css}" rel="stylesheet">
+
+        <!-- Bootstrap core JavaScript -->
+        <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+        <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+        <script th:src="@{/starrr.js}"></script>
+        <link th:href="@{/css/starrr.css}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+
+        <style>
+            .joinMembership {
+                position: absolute;
+                right: 9%;
+            }
+            .login {
+                position: absolute;
+                right: 3%;
+                margin-right: 330px;
+                margin-top: 13px;
+                padding-top: 0px;
+
+            }
+            .logout {
+                position: absolute;
+                right: 2%;
+                margin-right: 330px;
+                margin-top: 13px;
+                padding-top: 0px;
+            }
+            #backgroundImg {
+                position: absolute;
+                opacity: 0.2;
+                z-index: -1;
+                width: 100%;
+                height: 100%;
+            }
+            #backgroundImgMovie {
+                position: absolute;
+                opacity: 0.2;
+                z-index: -1;
+                width: 100%;
+                height: 570px;
+            }   #nav {
+                    position: absolute;
+                    top: 48px;
+                    width: 100%;
+                    text-align: center;
+                    cursor: default;
+                }
+
+        </style>
+    </head>
+
+    <body>
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" style="background-color: white !important; padding-bottom: 120px;border-bottom: 0px solid !important;">
+                <nav id="nav">
+                    <ul style="padding-left: 32px">
+                        <li><a class="icon solid fa-home" th:href="@{/}"><span>홈</span></a></li>
+                        <li><a class="icon solid fa-retweet" th:href="@{/netflix.html}"><span>넷플릭스</span></a></li>
+                        <li><a class="icon solid fa-retweet" th:href="@{/watcha.html}"><span>왓챠</span></a></li>
+                        <li><a class="icon solid fa-sitemap" th:href="@{/wavve.html}"><span>웨이브</span></a></li>
+                        <li><a class="icon solid fa-sitemap" href="/movie/list" target="_self"><span>모든 영화 보기</span></a></li>
+                        <li><a class="icon solid fa-sitemap" href="/freeboard/list" target="_self"><span>자유게시판</span></a></li>
+                        <!--                    <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='../movie/signup'">회원가입</button>-->
+                        <li><a class="icon solid fa-sitemap" onclick="location.href='../movie/signup'"><span>회원가입</span></a></li>
+                        <li><span><a th:href="@{/login}"><button type="button" sec:authorize="isAnonymous()" class="btn btn-secondary btn-sm" style="font-size: 10px;">로그인</button></a></span></li>
+                        <li><span><a th:href="@{/logout}"><button type="button" sec:authorize="isAuthenticated()" class="btn btn-secondary btn-sm" style="font-size: 10px;">로그아웃</button></a></span></li>
+                    </ul>
+                </nav>
+            </nav>
+
+            <!-- content 영역-->
+            <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+                <th:block th:replace="${content}"></th:block>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+    </body>
+    <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2 text-muted">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2 text-muted">Features</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2 text-muted">Pricing</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2 text-muted">FAQs</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2 text-muted">About</a>
+            </li>
+        </ul>
+        <p class="text-center text-muted">© 2021 Company, Inc</p>
+    </footer>
+</th:block>
+</html>

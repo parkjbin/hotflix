@@ -1,0 +1,74 @@
+
+파일 업로드를 위한 application.properties 설정 추가
+
+spring.servlet.multipart.enabled=true // 파일 업로드 기능 여부를 선택합니다.
+spring.servlet.multipart.location=C:\\upload // 업로드된 파일의 임시 저장 경로
+spring.servlet.multipart.max-request-size=30MB // 한 번에 최대 업로드 가능 용량
+spring.servlet.multipart.max-file-size=10MB // 파일 하나의 최대 크기
+
+org.zerock.upload.path = C:\\upload // 파일이 저장된 경로
+http://localhost:8081/uploadEx 접속하여 이미지 파일 업로드(여러개 가능) 후 저장 경로에 저장된 이미지 파일들 확인
+
+------------------------------------------------------------------------------------------------------------------------
+
+uploadEx.html 파일에서 파일 업로드를 위한 <script> 설정 방법
+1) 웹 브라우저에서 https://code.jquery.com/jquery/ 검색
+2) jQuery Core - All 3.x Versions - 사용하고자 하는 버전 선택
+3) 버전 우측에 있는 minified(축소) 클릭
+4) 우측에 있는 카피 버튼 클릭해서 사용
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous">
+    </script>
+
+src: jquery를 외부에서 사용하기 위한 경로
+integrity, crossorigin: 서버에 아래와 같은 주석을 등록하여, 사용자가 악의적인 공격에 사용되는 것을 막을 수 있음, 즉 보안 설정
+
+------------------------------------------------------------------------------------------------------------------------
+
+ajax란 무엇인가?
+http://tcpschool.com/ajax/ajax_intro_basic
+
+jquery에서 ajax 사용 예시 API 도큐먼트
+https://api.jquery.com/jquery.ajax/
+
+------------------------------------------------------------------------------------------------------------------------
+
+직렬화: Serialize
+직렬화란 자바 시스템 내부에서 사용되는 객체 또는 데이터를 외부의 자바 시스템에서도 사용할 수 있도록 바이트(byte) 형태로 데이터 변환하는 기술과 바이트로 변환된 데이터를 다시 객체로 변환하는 기술(역직렬화)
+JVM(Java Virtual Machine 이하 JVM)의 메모리에 상주(힙 또는 스택)되어 있는 객체 데이터를 바이트 형태로 변환하는 기술과 직렬화된 바이트 형태의 데이터를 객체로 변환해서 JVM으로 상주시키는 형태
+java.io.Serializable 인터페이스를 상속받은 객체는 직렬화 할 수 있는 기본 조건을 가집니다.
+
+역직렬화(Deserialize)
+byte로 변환된 Data를 원래대로 Object나 Data로 변환하는 기술을 역직렬화(Deserialize)라고 부릅니다.
+직렬화된 바이트 형태의 데이터를 객체로 변환해서 JVM으로 상주시키는 형태.
+
+용도
+1) 생성한 객체를 파일로 저장할 일이 있을 수도 있습니다.
+2) 저장한 객체를 읽을 일이 생길 수도 있습니다.
+3) 다른 서버에서 생성한 객체를 받을 일도 생길 수 있습니다.
+
+출처 : https://nesoy.github.io/articles/2018-04/Java-Serialize
+출처 : https://techblog.woowahan.com/2550/
+출처 : https://ktko.tistory.com/entry/JAVA-%EA%B0%9D%EC%B2%B4%EC%9D%98-%EC%A7%81%EB%A0%AC%ED%99%94Serializable-serialVersionUID
+
+------------------------------------------------------------------------------------------------------------------------
+
+Http 상태 코드 표
+https://developer.mozilla.org/ko/docs/Web/HTTP/Status
+
+MIME 타입
+https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+
+1. RequestBody, ModelAttribute, RequestParam이란?
+https://mangkyu.tistory.com/72
+
+경고, 다이어로그, 접기
+https://araikuma.tistory.com/93
+
+starrr: 별점주기 라이브러리
+https://github.com/dobtco/starrr
+
+font-awesome
+https://cdnjs.com/libraries/font-awesome/4.2.0
